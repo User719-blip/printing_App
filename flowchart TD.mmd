@@ -1,0 +1,56 @@
+flowchart TD
+    %% Group components by architectural layers
+    subgraph Presentation["Presentation Layer"]
+        UI[Print Dialog UI]
+        FB[File Bloc]
+        QB[Queue Bloc]
+    end
+    
+    subgraph Domain["Domain Layer"]
+        PU[Print UseCase]
+        SPJ[Submit Print Job UseCase]
+        PR[Print Repository Interface]
+        QR[Queue Repository Interface]
+    end
+    
+    subgraph Data["Data Layer"]
+        QDS[Queue Data Source]
+    end
+    
+    subgraph External["External Systems"]
+        SS[Supabase Storage]
+        SD[Supabase Database]
+    end
+    
+    %% File selection flow
+    UI-->|1. Select Files|FB
+    FB-->|2. Load Files|PU
+    PU-->|3. Get Files|PR
+    PR-->|4. Files Loaded|PU
+    PU-->|5. Files Available|FB
+    FB-->|6. Files Displayed|UI
+    
+    %% Print submission flow
+    UI-->|7. Submit Print|QB
+    QB-->|8. Submit Job|SPJ
+    SPJ-->|9. Create Job|QR
+    QR-->|10. Upload File|QDS
+    QDS-->|11. Store File|SS
+    SS-->|12. File URL|QDS
+    QDS-->|13. Create Job Record|SD
+    SD-->|14. Job ID|QDS
+    QDS-->|15. Job Created|QR
+    QR-->|16. Job Entity|SPJ
+    SPJ-->|17. Job Submitted|QB
+    QB-->|18. Show Status|UI
+    
+    %% Styling
+    classDef presentation fill:#bff,stroke:#333,stroke-width:2px
+    classDef domain fill:#bfb,stroke:#333,stroke-width:2px
+    classDef data fill:#fbf,stroke:#333,stroke-width:2px
+    classDef external fill:#ffb,stroke:#333,stroke-width:2px
+    
+    class UI,FB,QB presentation
+    class PU,SPJ,PR,QR domain
+    class QDS data
+    class SS,SD external

@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant UI as Print Dialog UI
+    participant FB as File Bloc
+    participant QB as Queue Bloc
+    participant PU as Print UseCase
+    participant SPJ as Submit Print Job UseCase
+    participant PR as Print Repository
+    participant QR as Queue Repository
+    participant QDS as Queue Data Source
+    participant SS as Supabase Storage
+    participant SD as Supabase Database
+    
+    UI->>FB: 1. Select Files
+    FB->>PU: 2. Load Files
+    PU->>PR: 3. Get Files
+    PR->>PU: 4. Files Loaded
+    PU->>FB: 5. Files Available
+    FB->>UI: 6. Files Displayed
+    
+    UI->>QB: 7. Submit Print
+    QB->>SPJ: 8. Submit Job
+    SPJ->>QR: 9. Create Job
+    QR->>QDS: 10. Upload File
+    QDS->>SS: 11. Store File
+    SS->>QDS: 12. File URL
+    QDS->>SD: 13. Create Job Record
+    SD->>QDS: 14. Job ID
+    QDS->>QR: 15. Job Created
+    QR->>SPJ: 16. Job Entity
+    SPJ->>QB: 17. Job Submitted
+    QB->>UI: 18. Show Status

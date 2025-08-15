@@ -1,0 +1,8 @@
+graph LR
+    UnitTest[Unit Tests] --> DomainLayer[Domain Layer]
+    IntegrationTest[Integration Tests] --> DataLayer[Data Layer]
+    WidgetTest[Widget Tests] --> PresentationLayer[Presentation Layer]
+    
+    style UnitTest fill:#bfb,stroke:#333,stroke-width:2px
+    style IntegrationTest fill:#fbf,stroke:#333,stroke-width:2px
+    style WidgetTest fill:#bbf,stroke:#333,stroke-width:2px
