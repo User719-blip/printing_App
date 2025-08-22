@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_app/core/theme/apppaleet.dart';
 import 'package:printing_app/home/presentation/widgets/file_preview_widget.dart';
 import 'package:printing_app/queue/data/repo/queue_repo_impl.dart';
-import 'package:printing_app/queue/data/usecases/queue_usecase.dart';
+import 'package:printing_app/queue/data/usercases/queue_usecase.dart';
 import 'package:printing_app/queue/presentation/bloc/queue_bloc.dart';
 import 'package:printing_app/queue/presentation/bloc/queue_event.dart';
 import 'package:printing_app/queue/presentation/bloc/queue_state.dart';

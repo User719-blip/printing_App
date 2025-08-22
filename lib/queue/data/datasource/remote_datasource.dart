@@ -108,14 +108,14 @@ class SupabaseService {
   // Get the position in queue
   static Future<int> getQueuePosition(String jobId) async {
     try {
-       print('Getting queue position for job: $jobId');
+       //print('Getting queue position for job: $jobId');
       // Count pending jobs created before this job
       
     try {
       final response = await client.rpc('get_queue_position', params: {'job_id': jobId});
       
       if (response is Map && response.containsKey('error') && response['error'] != null) {
-         print('Error in response: ${response['error']}');
+         //print('Error in response: ${response['error']}');
         throw QueueException(
           message: 'Failed to get queue position: ${response['error']}',
           code: 'RPC_ERROR',
@@ -123,15 +123,15 @@ class SupabaseService {
       }
 
       if (response is int) {
-        print('Queue position: $response');
+       // print('Queue position: $response');
         return response;
       }
       
      final position = int.tryParse(response.toString()) ?? 1;
-      print('Queue position (parsed): $position');
+      //print('Queue position (parsed): $position');
       return position;
   } catch(e) {
-    print('RPC call error: $e');
+   // print('RPC call error: $e');
     return 1;
   }
     } catch (e, stackTrace) {

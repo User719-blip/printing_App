@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:printing_app/core/errors/error_handlers.dart';
-import 'package:printing_app/queue/data/usecases/queue_usecase.dart';
+import 'package:printing_app/queue/data/usercases/queue_usecase.dart';
 import 'package:printing_app/queue/domain/entity/printjobentity.dart';
 import 'queue_event.dart';
 import 'queue_state.dart';
@@ -34,12 +34,12 @@ class QueueBloc extends Bloc<QueueEvent, QueueState> {
     emit(QueueSubmitting());
     
     try {
-      print('Submitting print job: ${event.file.name}');
+    //  print('Submitting print job: ${event.file.name}');
       final job = await submitPrintJobUseCase(
         file: event.file,
         copies: event.copies,
       );
-      print('Job submitted successfully, emitting QueueSubmitted state');
+    //  print('Job submitted successfully, emitting QueueSubmitted state');
       emit(QueueSubmitted(job));
       
       // Automatically start tracking the job
